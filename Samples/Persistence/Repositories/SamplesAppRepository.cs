@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Samples.Core.Models;
 using Samples.Core.Repositories;
 
@@ -7,19 +9,27 @@ namespace Samples.Persistence.Repositories
 {
     public class SamplesAppRepository : ISamplesAppRepository
     {
-        public List<Sample> GetSamples()
+        private readonly SamplesAppContext _context;
+
+        public SamplesAppRepository(SamplesAppContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public List<Sample> GetSamplesByStatus(int statusId)
+        public IEnumerable<Sample> GetSamples(int? status = null, string name = null)
         {
-            throw new NotImplementedException();
-        }
+            var samples =  _context.Samples
+                .Include(s => s.Creator)
+                .Include(s => s.Status)
+                .AsNoTracking();
 
-        public List<Sample> GetSamplesByNames(string searchTerm)
-        {
-            throw new NotImplementedException();
+            if (status.HasValue)
+                samples = samples.Where(s => s.StatusId == status);
+     
+            if (name != null)
+                samples = samples.Where(s => s.Creator.FullName.ToLower().Contains(name.ToLower()));
+
+            return samples;
         }
 
         public void AddSample()

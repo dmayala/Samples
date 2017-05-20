@@ -4,7 +4,7 @@ using Samples.Persistence.EntityConfigurations;
 
 namespace Samples.Persistence
 {
-    public class SamplesAppContext : DbContext
+    public class SamplesAppContext : DbContext, ISamplesAppContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Status> Statuses { get; set; }

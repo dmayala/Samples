@@ -8,7 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Samples.Core.Repositories;
 using Samples.Persistence;
+using Samples.Persistence.Repositories;
 
 namespace Samples
 {
@@ -36,6 +38,7 @@ namespace Samples
                 options.UseSqlServer(Configuration.GetConnectionString("SamplesAppDatabase")));
 
             services.AddTransient<SamplesAppContextSeedData>();
+            services.AddScoped<ISamplesAppRepository, SamplesAppRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
