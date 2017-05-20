@@ -8,9 +8,10 @@ using Samples.Persistence;
 namespace Samples.Migrations
 {
     [DbContext(typeof(SamplesAppContext))]
-    partial class SamplesAppContextModelSnapshot : ModelSnapshot
+    [Migration("20170520155547_CreatedAtStamp")]
+    partial class CreatedAtStamp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")

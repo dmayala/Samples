@@ -12,6 +12,9 @@ namespace Samples.Persistence.EntityConfigurations
             builder.HasOne(x => x.Creator)
                 .WithMany()
                 .HasForeignKey(x => x.CreatedBy);
+            builder.Property(x => x.CreatedAt)
+                .ValueGeneratedOnAdd()
+                .HasDefaultValueSql("GETDATE()");
         }
     }
 }

@@ -6,6 +6,7 @@ namespace Samples.Core.Repositories
     public interface ISamplesAppRepository
     {
         IEnumerable<Sample> GetSamples(int? status = null, string name = null);
-        void AddSample();
+        void AddSample(Sample sample);
+        bool SaveAll();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Samples.Core.Models;
@@ -17,18 +18,36 @@ namespace Samples.Controllers
         }
 
         // GET api/Samples
+        // Optional Query - api/Samples?status=0&name=Example
         [HttpGet]
         public IActionResult Get([FromQuery] int? status, [FromQuery] string name)
         {
-            var samples = _repository.GetSamples(status, name);
-            return StatusCode(StatusCodes.Status200OK, samples);
+            try
+            {
+                var samples = _repository.GetSamples(status, name);
+                return StatusCode(StatusCodes.Status200OK, samples);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest);
+            }
         }
 
         // POST api/Samples
         [HttpPost]
-        public IActionResult Post([FromBody] string dto)
+        public IActionResult Post([FromBody] Sample sample)
         {
-            return StatusCode(StatusCodes.Status200OK);
+            try
+            {
+                _repository.AddSample(sample);
+                _repository.SaveAll();
+                return StatusCode(StatusCodes.Status200OK);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest);
+            }
+       
         }
 
     }

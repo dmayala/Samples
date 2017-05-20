@@ -32,9 +32,14 @@ namespace Samples.Persistence.Repositories
             return samples;
         }
 
-        public void AddSample()
+        public void AddSample(Sample sample)
         {
-            throw new NotImplementedException();
+            _context.Add(sample);
+        }
+
+        public bool SaveAll()
+        {
+            return _context.SaveChanges() > 0;
         }
     }
 }
