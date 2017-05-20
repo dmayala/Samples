@@ -34,10 +34,12 @@ namespace Samples
 
             services.AddDbContext<SamplesAppContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("SamplesAppDatabase")));
+
+            services.AddTransient<SamplesAppContextSeedData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IServiceProvider serviceProvider, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -50,6 +52,9 @@ namespace Samples
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            serviceProvider.GetService<SamplesAppContextSeedData>()
+                .EnsureSeedData();
         }
     }
 }

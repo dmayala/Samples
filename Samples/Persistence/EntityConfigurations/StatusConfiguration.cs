@@ -9,6 +9,8 @@ namespace Samples.Persistence.EntityConfigurations
         public override void Map(EntityTypeBuilder<Status> builder)
         {
             builder.HasKey(x => x.StatusId);
+            builder.Property(x => x.StatusName)
+                .HasColumnName("Status");
         }
     }
 }
