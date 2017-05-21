@@ -5,9 +5,19 @@
     <PackageTargetFallback>portable-net45+win8</PackageTargetFallback>
   </PropertyGroup>
 
+  <!--<Target Name="MyPreCompileTarget" BeforeTargets="Build">
+    <Exec Command="npm run build" />
+  </Target>-->
+
+  <ItemGroup>
+    <Compile Remove="ClientApp\**" />
+    <Content Remove="ClientApp\**" />
+    <EmbeddedResource Remove="ClientApp\**" />
+    <None Remove="ClientApp\**" />
+  </ItemGroup>
+
   <ItemGroup>
     <Folder Include="Core\Dtos\" />
-    <Folder Include="ClientApp\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,17 +1,27 @@
-<ngx-datatable
-    class="material"
-    [columnMode]="'force'"
-    [rows]="samples"
-    [limit]="10"
-    [footerHeight]="50"
-    [rowHeight]="'auto'">
-    <ngx-datatable-column name="Id" prop="sampleId"></ngx-datatable-column>
-    <ngx-datatable-column name="Barcode" prop="barcode"></ngx-datatable-column>
-    <ngx-datatable-column name="Created At" prop="createdAt">
-        <template let-value="value" ngx-datatable-cell-template>
-            {{ value | date: 'MM/dd/yyyy'}}
-        </template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Created By" prop="creator.fullName"></ngx-datatable-column>
-    <ngx-datatable-column name="Status" prop="status.statusName"></ngx-datatable-column>
-</ngx-datatable>
+<div>
+    <div>
+        <input
+            type="text"
+            style="padding:8px;margin:15px auto;width:30%;"
+            placeholder="Filter by name..." 
+            (keyup)='updateFilter($event)' />
+    </div>
+    <ngx-datatable
+        #table
+        class="material"
+        [columnMode]="'force'"
+        [rows]="samples"
+        [limit]="12"
+        [footerHeight]="50"
+        [rowHeight]="'auto'">
+        <ngx-datatable-column name="Id" prop="sampleId"></ngx-datatable-column>
+        <ngx-datatable-column name="Barcode" prop="barcode"></ngx-datatable-column>
+        <ngx-datatable-column name="Created At" prop="createdAt">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+                {{ value | date: 'MM/dd/yyyy'}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Created By" prop="creator.fullName"></ngx-datatable-column>
+        <ngx-datatable-column name="Status" prop="status.statusName"></ngx-datatable-column>
+    </ngx-datatable>
+</div>

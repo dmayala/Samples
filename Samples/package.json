@@ -6,7 +6,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "lint": "ng lint"
+    "build-production": "ng build --production",
+    "lint": "ng lint",
+    "postinstall": "npm run build-production"
   },
   "private": true,
   "dependencies": {
