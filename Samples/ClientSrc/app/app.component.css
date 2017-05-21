@@ -1,0 +1,7 @@
+.samples-app-container {
+    height: auto;
+    width: 100%;
+    position: absolute;
+    top: 80px;
+    bottom: 0;
+}

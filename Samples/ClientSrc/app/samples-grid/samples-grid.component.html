@@ -1,0 +1,17 @@
+<ngx-datatable
+    class="material"
+    [columnMode]="'force'"
+    [rows]="samples"
+    [limit]="10"
+    [footerHeight]="50"
+    [rowHeight]="'auto'">
+    <ngx-datatable-column name="Id" prop="sampleId"></ngx-datatable-column>
+    <ngx-datatable-column name="Barcode" prop="barcode"></ngx-datatable-column>
+    <ngx-datatable-column name="Created At" prop="createdAt">
+        <template let-value="value" ngx-datatable-cell-template>
+            {{ value | date: 'MM/dd/yyyy'}}
+        </template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Created By" prop="creator.fullName"></ngx-datatable-column>
+    <ngx-datatable-column name="Status" prop="status.statusName"></ngx-datatable-column>
+</ngx-datatable>
