@@ -37,6 +37,11 @@ namespace Samples.Persistence.Repositories
             _context.Add(sample);
         }
 
+        public IEnumerable<Status> GetStatuses()
+        {
+            return _context.Statuses;
+        }
+
         public bool SaveAll()
         {
             return _context.SaveChanges() > 0;

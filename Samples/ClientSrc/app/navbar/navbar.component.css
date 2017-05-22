@@ -6,7 +6,7 @@
     color: #b2dbfb;
 }
 
-.navbar-brand:hover {
+.navbar-brand:hover, .navbar-brand:focus {
     color: #fff;
 }
 
@@ -14,6 +14,17 @@
     color: #b2dbfb;
 }
 
-.navbar-nav > li > a:hover {
+.navbar-nav > li > a:hover, .navbar-nav > li > a:focus  {
     color: #fff;
+}
+
+@media(min-width:768px){
+    .sm-view {
+        display:none;
+    }
+}
+@media(max-width:767px){
+    .lg-view {
+        display:none;
+    }
 }

@@ -7,6 +7,9 @@ namespace Samples.Core.Repositories
     {
         IEnumerable<Sample> GetSamples(int? status = null, string name = null);
         void AddSample(Sample sample);
+
+        IEnumerable<Status> GetStatuses();
+
         bool SaveAll();
     }
 }

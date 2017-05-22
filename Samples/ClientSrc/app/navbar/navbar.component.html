@@ -2,9 +2,12 @@
   <div class="container">
     <div class="navbar-header">
       <a href="#" class="navbar-brand">Samples</a>
+      <a href="#" (click)="AddSample.showModal()" class="navbar-brand pull-right sm-view" title="Add a New Sample"><i class="fa fa-plus"></i></a>
     </div>
     <ul class="nav navbar-nav navbar-right">
-      <li title="Add a New Sample"><a href="#"><i class="fa fa-plus"></i></a></li>
+      <li title="Add a New Sample" class="lg-view"><a href="#" (click)="AddSample.showModal()"><i class="fa fa-plus"></i></a></li>
     </ul>
   </div>
 </nav>
+
+<add-sample #AddSample></add-sample>

@@ -1,18 +1,35 @@
 <div>
-    <div>
-        <input
-            type="text"
-            style="padding:8px;margin:15px auto;width:30%;"
-            placeholder="Filter by name..." 
-            (keyup)='updateFilter($event)' />
+    <div class="row">
+        <div class="col-md-4">
+            <input
+                    type="text"
+                    style="padding:8px;margin:15px auto;width:100%;"
+                    placeholder="Filter by Name"
+                    [formControl]="nameControl" />
+        </div>
+        <div class="col-md-offset-5 col-md-3">
+            <select
+                class="pull-right"
+                style="padding:8px;margin:15px auto;width:100%; min-height: 40px;"
+                [formControl]="statusControl"
+                (change)="updateStatusFilter($event.target.value)">
+                <option value="" selected>Filter by Status</option>
+                <option *ngFor="let s of statuses" [value]="s.statusId">{{s.statusName}}</option>
+            </select>
+            <button 
+                class="btn btn-link pull-right reset-filters"
+                (click)="resetFilters()">
+                Reset Filters
+            </button>
+        </div>
     </div>
     <ngx-datatable
         #table
         class="material"
         [columnMode]="'force'"
         [rows]="samples"
-        [limit]="12"
-        [footerHeight]="50"
+        [limit]="10"
+        [footerHeight]="55"
         [rowHeight]="'auto'">
         <ngx-datatable-column name="Id" prop="sampleId"></ngx-datatable-column>
         <ngx-datatable-column name="Barcode" prop="barcode"></ngx-datatable-column>

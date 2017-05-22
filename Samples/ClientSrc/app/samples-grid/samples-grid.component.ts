@@ -1,43 +1,58 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { SamplesService } from '../samples.service';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { SamplesOptions } from '../samples.service';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+
+import 'rxjs/add/operator/debounceTime';
 
 @Component({
   selector: 'samples-grid',
   templateUrl: './samples-grid.component.html',
   styleUrls: ['./samples-grid.component.css'],
-  providers: [ SamplesService ]
+  providers: []
 })
 export class SamplesGridComponent implements OnInit {
-  private samples: any;
-  private cache: any;
-  private errorMessage: string; 
-  @ViewChild(DatatableComponent) table: DatatableComponent;
-
-  constructor(private samplesService: SamplesService) {}
-
-  ngOnInit() {
-    this.getSamples();
-  }
-
-  getSamples() {
-    this.samplesService.getSamples()
-      .subscribe(samples => {
-        this.cache = [...samples];
-        this.samples = samples;
-      },
-      error =>  this.errorMessage = <any>error);
-  }
-
-  updateFilter(event) {
-    const val = event.target.value.toLowerCase();
-
-    const cache = this.cache.filter((s) => {
-      return s.creator.fullName.toLowerCase().indexOf(val) !== -1 || !val;
-    });
-
-    this.samples = cache;
+  private _samples: any;
+  @Input()
+  public set samples(val) {
+    this._samples = val;
     this.table.offset = 0;
   }
+  public get samples() { return this._samples; }
+  @Input() statuses;
+  @Output() onFilter = new EventEmitter();
+  @ViewChild(DatatableComponent) table: DatatableComponent;
+  nameControl: FormControl = new FormControl();
+  statusControl: FormControl = new FormControl('');
+
+  private samplesOptions: SamplesOptions = {};
+
+  constructor() {}
+
+  ngOnInit() {
+    this.nameControl.valueChanges
+      .debounceTime(500)
+      .subscribe(e => this.updateNameFilter(e));
+  }
+
+  getSamples(options?: SamplesOptions) {
+    this.onFilter.emit(options);
+  }
+
+  updateNameFilter(newValue) {
+    this.samplesOptions.name = newValue.toLowerCase();
+    this.getSamples(this.samplesOptions);
+  }
+
+  updateStatusFilter(newValue) {
+    this.samplesOptions.status = newValue;
+    this.getSamples(this.samplesOptions);
+  }
   
+  resetFilters() {
+    this.samplesOptions = {};
+    this.nameControl.setValue('');
+    this.statusControl.setValue('');
+    this.getSamples();
+  }
 }

@@ -1,18 +1,37 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions, URLSearchParams } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
+export interface SamplesOptions {
+    status?: number,
+    name?: string
+}
+
 @Injectable()
 export class SamplesService {
   private samplesUrl = 'api/samples';
+  private statusesUrl = 'api/statuses';
 
   constructor(private http: Http) {}
 
-  getSamples() {
-    return this.http.get(this.samplesUrl)
+  getSamples(options: SamplesOptions = {}) {
+    let params: URLSearchParams = new URLSearchParams();
+    if (options.status) params.set('status', options.status.toString());
+    if (options.name) params.set('name', options.name);
+
+    let requestOptions = new RequestOptions();
+    requestOptions.params = params;
+
+    return this.http.get(this.samplesUrl, requestOptions)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  getStatuses() {
+    return this.http.get(this.statusesUrl)
       .map(this.extractData)
       .catch(this.handleError);
   }

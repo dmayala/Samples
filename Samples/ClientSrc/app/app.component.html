@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <div class="samples-app-container">
   <div class="container full-height">
-    <samples-grid></samples-grid>
+    <samples-grid [samples]="samples" [statuses]="statuses" (onFilter)="onFilter($event)"></samples-grid>
   </div>
 </div>
