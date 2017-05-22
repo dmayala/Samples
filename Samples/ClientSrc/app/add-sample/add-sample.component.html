@@ -1,19 +1,50 @@
-<div bsModal #addSampleModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addSampleModal" aria-hidden="true">
+<div bsModal #addSampleModal="bs-modal" (onHide)="resetState()" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addSampleModal" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title pull-left">Add a New Sample</h4>
-        <button type="button" class="close pull-right" (click)="addSampleModal.hide()" aria-label="Close">
+        <button type="button" class="close pull-right" (click)="closeModal()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form class="clearfix" [formGroup]="myForm" novalidate (ngSubmit)="onSubmit()">
           <div class="form-group">
             <label for="barcode">Barcode</label>
-            <input type="text" [(ngModel)]="sample.barcode" name="barcode" class="form-control" id="barcode" required>
+            <input type="text" formControlName="barcode" name="barcode" class="form-control" required>
+            <small [hidden]="myForm.controls.barcode.valid || (myForm.controls.barcode.pristine && !submitted)" class="text-danger">
+              Barcode is required.
+            </small>
           </div>
-          <button type="submit" class="btn btn-success">Submit</button>
+
+          <div class="form-group">
+            <label for="statusId">Status</label>
+              <select
+                class="form-control"
+                name="statusId"
+                formControlName="statusId"
+                required>
+                <option *ngFor="let s of statuses" [value]="s.statusId">{{s.statusName}}</option>
+              </select>
+              <small [hidden]="myForm.controls.statusId.valid || (myForm.controls.statusId.pristine && !submitted)" class="text-danger">
+                Status is required.
+              </small>          
+            </div>
+
+            <div class="form-group">
+              <label for="createdBy">Created By</label>
+              <select
+                class="form-control"
+                name="createdBy"
+                formControlName="createdBy"
+                required>
+                <option *ngFor="let u of users" [value]="u.userId">{{u.fullName}}</option>
+              </select>    
+              <small [hidden]="myForm.controls.createdBy.valid || (myForm.controls.createdBy.pristine && !submitted)" class="text-danger">
+                Created By User is required.
+              </small>       
+            </div>
+          <button type="submit" class="btn btn-custom pull-right">Submit</button>
         </form>
       </div>
     </div>

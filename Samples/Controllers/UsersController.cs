@@ -1,6 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Samples.Core.Dtos;
 using Samples.Core.Repositories;
 
 namespace Samples.Controllers
@@ -22,11 +23,21 @@ namespace Samples.Controllers
             try
             {
                 var users = _repository.GetUsers();
-                return StatusCode(StatusCodes.Status200OK, users);
+                return StatusCode(StatusCodes.Status200OK, new ResultBodyDto
+                {
+                    Status = "success",
+                    Data = users,
+                    Message = ""
+                });
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status400BadRequest);
+                return StatusCode(StatusCodes.Status400BadRequest, new ResultBodyDto
+                {
+                    Status = "error",
+                    Data = null,
+                    Message = "Failed to retrieve users"
+                });
             }
         }
     }

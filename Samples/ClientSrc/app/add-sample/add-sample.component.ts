@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Sample as SampleModel } from '../models/sample';
+import { Component, OnInit, Input, 
+  Output, ViewChild, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
 
 @Component({
   selector: 'add-sample',
@@ -9,16 +10,37 @@ import { Sample as SampleModel } from '../models/sample';
 export class AddSampleComponent implements OnInit {
   @Input() users;
   @Input() statuses;
+  @Output() onSubmitSample = new EventEmitter();
   @ViewChild('addSampleModal') private addSampleModal;
-  sample = {};
-  
-  constructor() { }
+  myForm: FormGroup;
+  submitted: boolean = false;
+  constructor(private _fb: FormBuilder) {
+    this.myForm = this._fb.group({
+      barcode: [null, <any>Validators.required],
+      statusId: [null, <any>Validators.required],
+      createdBy: [null, <any>Validators.required]
+    });
+   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  resetState() {
+    this.myForm.reset();
+    this.submitted = false;
   }
 
   showModal() {
     this.addSampleModal.show();
+  }
+
+  closeModal() {
+    this.addSampleModal.hide();
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    if (this.myForm.valid)
+      this.onSubmitSample.emit(this.myForm.value);
   }
 
 }

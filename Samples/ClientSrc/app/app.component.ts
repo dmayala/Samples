@@ -14,6 +14,8 @@ export class AppComponent implements OnInit {
   users;
   errorMessage: string;
   @ViewChild('AddSample') private AddSample;
+  @ViewChild('SamplesGrid') private SamplesGrid;
+
 
   constructor(private samplesService: SamplesService) {}
 
@@ -29,6 +31,14 @@ export class AppComponent implements OnInit {
 
   onFilter(options: SamplesOptions) {
     this.getSamples(options);
+  }
+
+  onSubmitSample(sample) {
+    this.samplesService.addSample(sample)
+      .subscribe(s => {
+        this.getSamples(this.SamplesGrid.samplesOptions);
+        this.AddSample.closeModal();
+      }, error => this.errorMessage = <any>error);
   }
 
   getSamples(options?: SamplesOptions) {

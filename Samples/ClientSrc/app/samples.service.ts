@@ -31,6 +31,12 @@ export class SamplesService {
       .catch(this.handleError);
   }
 
+  addSample(sample) {
+    return this.http.post(this.samplesUrl, sample)
+      .map(res =>  res.json() || {})
+      .catch(this.handleError);
+  }
+
   getStatuses() {
     return this.http.get(this.statusesUrl)
       .map(this.extractData)
@@ -45,7 +51,7 @@ export class SamplesService {
 
   private extractData(res: Response) {
     let body = res.json();
-    return body || [];
+    return body.data || [];
   }
 
   private handleError (error: Response | any) {

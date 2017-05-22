@@ -25,7 +25,7 @@ export class SamplesGridComponent implements OnInit {
   nameControl: FormControl = new FormControl();
   statusControl: FormControl = new FormControl('');
 
-  private samplesOptions: SamplesOptions = {};
+  samplesOptions: SamplesOptions = {};
 
   constructor() {}
 
