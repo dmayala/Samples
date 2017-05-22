@@ -42,6 +42,11 @@ namespace Samples.Persistence.Repositories
             return _context.Statuses;
         }
 
+        public IEnumerable<User> GetUsers()
+        {
+            return _context.Users;
+        }
+
         public bool SaveAll()
         {
             return _context.SaveChanges() > 0;

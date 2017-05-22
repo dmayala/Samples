@@ -14,6 +14,7 @@ export interface SamplesOptions {
 export class SamplesService {
   private samplesUrl = 'api/samples';
   private statusesUrl = 'api/statuses';
+  private usersUrl = 'api/users';
 
   constructor(private http: Http) {}
 
@@ -32,6 +33,12 @@ export class SamplesService {
 
   getStatuses() {
     return this.http.get(this.statusesUrl)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  getUsers() {
+    return this.http.get(this.usersUrl)
       .map(this.extractData)
       .catch(this.handleError);
   }

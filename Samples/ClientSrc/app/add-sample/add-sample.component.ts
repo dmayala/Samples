@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Sample as SampleModel } from '../models/sample';
 
 @Component({
@@ -7,9 +7,11 @@ import { Sample as SampleModel } from '../models/sample';
   styleUrls: ['./add-sample.component.css']
 })
 export class AddSampleComponent implements OnInit {
+  @Input() users;
+  @Input() statuses;
   @ViewChild('addSampleModal') private addSampleModal;
   sample = {};
-
+  
   constructor() { }
 
   ngOnInit() {

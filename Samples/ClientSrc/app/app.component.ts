@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SamplesService, SamplesOptions } from './samples.service';
 
 @Component({
@@ -9,15 +9,22 @@ import { SamplesService, SamplesOptions } from './samples.service';
 })
 export class AppComponent implements OnInit {
   title = 'Samples';
-  samples: any;
-  statuses: any;
+  samples;
+  statuses;
+  users;
   errorMessage: string;
+  @ViewChild('AddSample') private AddSample;
 
   constructor(private samplesService: SamplesService) {}
 
   ngOnInit() {
     this.getSamples();
     this.getStatuses();
+    this.getUsers();
+  }
+
+  onAddClick() {
+    this.AddSample.showModal();
   }
 
   onFilter(options: SamplesOptions) {
@@ -33,5 +40,10 @@ export class AppComponent implements OnInit {
   getStatuses() {
     this.samplesService.getStatuses()
       .subscribe(statuses => this.statuses = statuses);
+  }
+
+  getUsers() {
+    this.samplesService.getUsers()
+      .subscribe(users => this.users = users);
   }
 }

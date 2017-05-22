@@ -10,6 +10,8 @@ namespace Samples.Core.Repositories
 
         IEnumerable<Status> GetStatuses();
 
+        IEnumerable<User> GetUsers();
+
         bool SaveAll();
     }
 }

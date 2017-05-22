@@ -1,6 +1,7 @@
-<app-navbar></app-navbar>
+<app-navbar (onAddClick)="onAddClick($event)"></app-navbar>
 <div class="samples-app-container">
   <div class="container full-height">
     <samples-grid [samples]="samples" [statuses]="statuses" (onFilter)="onFilter($event)"></samples-grid>
   </div>
 </div>
+<add-sample #AddSample [users]="users" [statuses]="statuses"></add-sample>

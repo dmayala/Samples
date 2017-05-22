@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -6,10 +6,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  @ViewChild('AddSample') AddSample;
-
+  @Output() onAddClick = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
+  }
+
+  addClick() {
+    this.onAddClick.emit();
   }
 }
