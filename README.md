@@ -7,9 +7,9 @@ A .NET Core/Angular application that displays a list of samples and allows new s
   - [Angular CLI](https://www.npmjs.com/package/@angular/cli)
 
 ## Running Locally
-Install the software in the above requirements, then open Samples.sln in Visual Studio 2017.
+Install the software in the above requirements then open Samples.sln in Visual Studio 2017.
 
-Open the Package Manager Console (Tools - NuGet Package Manager - Package Manager Console), and run the following command:
+Open the Package Manager Console (Tools - NuGet Package Manager - Package Manager Console) and run the following commands:
 ```sh
   Update-Database
   cd Samples
