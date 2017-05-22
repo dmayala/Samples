@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="clearfix" [formGroup]="myForm" novalidate (ngSubmit)="onSubmit()">
+        <form class="clearfix" [formGroup]="myForm" novalidate autocomplete="off" (ngSubmit)="onSubmit()">
           <div class="form-group">
             <label for="barcode">Barcode</label>
             <input type="text" formControlName="barcode" name="barcode" class="form-control" required>

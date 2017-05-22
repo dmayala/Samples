@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Samples.Core.Models;
 using Samples.Persistence.EntityConfigurations;
 

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SamplesService, SamplesOptions } from './samples.service';
+import { Toast, ToasterService} from 'angular2-toaster';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ export class AppComponent implements OnInit {
   @ViewChild('SamplesGrid') private SamplesGrid;
 
 
-  constructor(private samplesService: SamplesService) {}
+  constructor(private samplesService: SamplesService, private toasterService: ToasterService) {}
 
   ngOnInit() {
     this.getSamples();
@@ -38,7 +39,11 @@ export class AppComponent implements OnInit {
       .subscribe(s => {
         this.getSamples(this.SamplesGrid.samplesOptions);
         this.AddSample.closeModal();
-      }, error => this.errorMessage = <any>error);
+        this.toasterService.pop({ type: 'success', body: 'Your sample has been added.' } as Toast)
+      }, error => {
+        this.errorMessage = <any>error;
+        this.toasterService.pop({ type: 'error', body: 'Failed to add new sample.' } as Toast)
+      });
   }
 
   getSamples(options?: SamplesOptions) {

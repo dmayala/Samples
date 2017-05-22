@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, 
   Output, ViewChild, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
+import { CustomValidators } from '../../utils/custom-validators';
 
 @Component({
   selector: 'add-sample',
@@ -14,14 +15,14 @@ export class AddSampleComponent implements OnInit {
   @ViewChild('addSampleModal') private addSampleModal;
   myForm: FormGroup;
   submitted: boolean = false;
-  constructor(private _fb: FormBuilder) {
-    this.myForm = this._fb.group({
-      barcode: [null, <any>Validators.required],
-      statusId: [null, <any>Validators.required],
-      createdBy: [null, <any>Validators.required]
+  constructor(private fb: FormBuilder) {
+    this.myForm = this.fb.group({
+      barcode: [ null, CustomValidators.required ],
+      statusId: [ null, Validators.required ],
+      createdBy: [ null, Validators.required ]
     });
    }
-
+  
   ngOnInit() {}
 
   resetState() {
@@ -39,8 +40,10 @@ export class AddSampleComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    if (this.myForm.valid)
+    if (this.myForm.valid) {
       this.onSubmitSample.emit(this.myForm.value);
+      this.closeModal();
+    }
   }
 
 }
