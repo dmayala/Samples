@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
     this.getUsers();
   }
 
-  onAddClick() {
+  onAddClick(e) {
     this.AddSample.showModal();
   }
 

@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build-production": "ng build --prod",
+    "build-production": "ng build --prod --no-progress",
     "lint": "ng lint",
     "postinstall": "npm run build-production"
   },
