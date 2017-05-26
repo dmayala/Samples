@@ -52,7 +52,8 @@ export class SamplesGridComponent implements OnInit {
   
   resetFilters() {
     this.samplesOptions = {};
-    this.nameControl.setValue('');
-    this.statusControl.setValue('');
+    this.nameControl.setValue('', { emitEvent: false });
+    this.statusControl.setValue('', { emitEvent: false });
+    this.getSamples();
   }
 }
