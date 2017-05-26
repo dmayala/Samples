@@ -20,6 +20,7 @@ export class SamplesGridComponent implements OnInit {
   }
   public get samples() { return this._samples; }
   @Input() statuses;
+  @Input() isFetching: boolean = false;
   @Output() onFilter = new EventEmitter();
   @ViewChild(DatatableComponent) table: DatatableComponent;
   nameControl: FormControl = new FormControl();
@@ -53,6 +54,5 @@ export class SamplesGridComponent implements OnInit {
     this.samplesOptions = {};
     this.nameControl.setValue('');
     this.statusControl.setValue('');
-    this.getSamples();
   }
 }

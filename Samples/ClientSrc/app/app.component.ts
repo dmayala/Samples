@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   samples;
   statuses;
   users;
+  isFetchingSamples: boolean;
   errorMessage: string;
   @ViewChild('AddSample') private AddSample;
   @ViewChild('SamplesGrid') private SamplesGrid;
@@ -47,7 +48,9 @@ export class AppComponent implements OnInit {
   }
 
   getSamples(options?: SamplesOptions) {
+    this.isFetchingSamples = true;
     this.samplesService.getSamples(options)
+      .finally(() => this.isFetchingSamples = false)
       .subscribe(samples => this.samples = samples,
                  error =>  this.errorMessage = <any>error);
   }
