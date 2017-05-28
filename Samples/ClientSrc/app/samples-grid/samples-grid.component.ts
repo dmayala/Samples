@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { SamplesOptions } from '../samples.service';
+import { SamplesOptions } from '../app.service';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 import 'rxjs/add/operator/debounceTime';
@@ -17,6 +17,7 @@ export class SamplesGridComponent implements OnInit {
   public set samples(val) {
     this._samples = val;
     this.table.offset = 0;
+    this.table.bodyComponent.updateOffsetY(0);
   }
   public get samples() { return this._samples; }
   @Input() statuses;

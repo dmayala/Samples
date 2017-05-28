@@ -1,4 +1,4 @@
-<div>
+<div style="position: relative; height: 100%;">
     <div class="row">
         <div class="col-md-4">
             <input
@@ -23,23 +23,27 @@
             </button>
         </div>
     </div>
-    <ngx-datatable
-        #table
-        class="material"
-        [columnMode]="'force'"
-        [rows]="samples"
-        [limit]="10"
-        [loadingIndicator]="isFetching"
-        [footerHeight]="55"
-        [rowHeight]="'auto'">
-        <ngx-datatable-column name="Id" prop="sampleId"></ngx-datatable-column>
-        <ngx-datatable-column name="Barcode" prop="barcode"></ngx-datatable-column>
-        <ngx-datatable-column name="Created At" prop="createdAt">
-            <ng-template let-value="value" ngx-datatable-cell-template>
-                {{ value | date: 'MM/dd/yyyy'}}
-            </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Created By" prop="creator.fullName"></ngx-datatable-column>
-        <ngx-datatable-column name="Status" prop="status.statusName"></ngx-datatable-column>
-    </ngx-datatable>
+    <div class="data-table-wrapper">
+        <ngx-datatable
+            #table
+            class="material full-height"
+            [columnMode]="'force'"
+            [rows]="samples"
+            [loadingIndicator]="isFetching"
+            [scrollbarH]="false"
+            [scrollbarV]="true"
+            [rowHeight]="50"      
+            [footerHeight]="60">
+            <ngx-datatable-column name="Id" prop="sampleId"></ngx-datatable-column>
+            <ngx-datatable-column name="Barcode" prop="barcode"></ngx-datatable-column>
+            <ngx-datatable-column name="Created At" prop="createdAt">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    {{ value | date: 'MM/dd/yyyy'}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Created By" prop="creator.fullName"></ngx-datatable-column>
+            <ngx-datatable-column name="Status" prop="status.statusName"></ngx-datatable-column>
+        </ngx-datatable>
+    </div>
 </div>
+

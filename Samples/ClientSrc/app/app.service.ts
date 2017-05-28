@@ -12,7 +12,7 @@ export interface SamplesOptions {
 }
 
 @Injectable()
-export class SamplesService {
+export class AppService {
   private samplesUrl = 'api/samples';
   private statusesUrl = 'api/statuses';
   private usersUrl = 'api/users';

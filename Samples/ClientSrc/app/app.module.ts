@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import {ToasterModule } from 'angular2-toaster';
+import { ToasterModule } from 'angular2-toaster';
 
 import { AppComponent } from './app.component';
 import { SamplesGridComponent } from './samples-grid/samples-grid.component';

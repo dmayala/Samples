@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { SamplesService, SamplesOptions } from './samples.service';
+import { AppService, SamplesOptions } from './app.service';
 import { Toast, ToasterService} from 'angular2-toaster';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [ SamplesService ]
+  providers: [ AppService ]
 })
 export class AppComponent implements OnInit {
   title = 'Samples';
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   @ViewChild('SamplesGrid') private SamplesGrid;
 
 
-  constructor(private samplesService: SamplesService, private toasterService: ToasterService) {}
+  constructor(private appService: AppService, private toasterService: ToasterService) {}
 
   ngOnInit() {
     this.getSamples();
@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
   }
 
   onSubmitSample(sample) {
-    this.samplesService.addSample(sample)
+    this.appService.addSample(sample)
       .subscribe(s => {
         this.getSamples(this.SamplesGrid.samplesOptions);
         this.AddSample.closeModal();
@@ -49,19 +49,19 @@ export class AppComponent implements OnInit {
 
   getSamples(options?: SamplesOptions) {
     this.isFetchingSamples = true;
-    this.samplesService.getSamples(options)
+    this.appService.getSamples(options)
       .finally(() => this.isFetchingSamples = false)
       .subscribe(samples => this.samples = samples,
                  error =>  this.errorMessage = <any>error);
   }
 
   getStatuses() {
-    this.samplesService.getStatuses()
+    this.appService.getStatuses()
       .subscribe(statuses => this.statuses = statuses);
   }
 
   getUsers() {
-    this.samplesService.getUsers()
+    this.appService.getUsers()
       .subscribe(users => this.users = users);
   }
 }

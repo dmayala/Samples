@@ -3,3 +3,28 @@
     padding: 0;
     padding-bottom: 5px;
 }
+
+.data-table-wrapper {
+    position: absolute;
+    width:100%;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+}
+
+@media(max-width:767px){
+    .data-table-wrapper {
+        top: 165px;
+    }
+}
+@media(min-width:768px){
+    .data-table-wrapper {
+        top: 165px;
+    }
+}
+@media(min-width:992px){
+    .data-table-wrapper {
+        top: 85px;
+    }
+    
+}
